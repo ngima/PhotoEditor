@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
@@ -101,6 +102,15 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                 //.setDefaultTextTypeface(mTextRobotoTf)
                 //.setDefaultEmojiTypeface(mEmojiTypeFace)
                 .build(); // build photo editor sdk
+
+        mPhotoEditorView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+                    mPhotoEditor.addIssue(1, ((int) motionEvent.getX()), ((int) motionEvent.getY()));
+                return true;
+            }
+        });
 
         mPhotoEditor.setOnPhotoEditorListener(this);
 
@@ -361,6 +371,10 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
                         mTxtCurrentTool.setText(R.string.label_text);
                     }
                 });
+                break;
+            case ISSUE:
+                mPhotoEditor.addIssue(1);
+                mTxtCurrentTool.setText(R.string.label_issue);
                 break;
             case ERASER:
                 mPhotoEditor.brushEraser();
