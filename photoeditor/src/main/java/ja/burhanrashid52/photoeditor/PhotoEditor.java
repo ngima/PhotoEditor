@@ -384,7 +384,7 @@ public class PhotoEditor implements BrushViewChangeListener {
         addedViews.add(rootView);
 
         if (viewType == ViewType.ISSUE) {
-            Animation animation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.anim_bouncing);
+            Animation animation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.anim_bgiouncing);
             animation.setStartOffset(0);
             rootView.startAnimation(animation);
         }
@@ -397,8 +397,8 @@ public class PhotoEditor implements BrushViewChangeListener {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         Log.d("=======", "Width; " + rootView.getWidth());
 
-        params.leftMargin = x - 50;
-        params.topMargin = y - 50;
+        params.leftMargin = x - Utils.dpToPx(18);
+        params.topMargin = y - Utils.dpToPx(18);
         parentView.addView(rootView, params);
         addedViews.add(rootView);
 
@@ -485,7 +485,11 @@ public class PhotoEditor implements BrushViewChangeListener {
                 imgClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewUndo(finalRootView, viewType);
+                        if (viewType == ViewType.ISSUE) {
+
+                        } else {
+                            viewUndo(finalRootView, viewType);
+                        }
                     }
                 });
             }

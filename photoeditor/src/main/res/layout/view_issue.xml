@@ -6,20 +6,21 @@
 
     <FrameLayout
         android:id="@+id/frmIssue"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:minWidth="36dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:background="@drawable/rounded_red">
 
         <TextView
             android:id="@+id/tvPhotoEditorText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_height="match_parent"
+            android:minWidth="36dp"
+            android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            tools:text="12"
+            tools:text="1"
             tools:textColor="@android:color/white" />
 
     </FrameLayout>

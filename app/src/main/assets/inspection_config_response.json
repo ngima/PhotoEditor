@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "message": "",
+  "status_code": 200,
+  "data": {
+    "meta": {
+      "required_no_issue_image": false,
+      "identifier": "<TRAILER ID or UNIT ID>",
+      "inspection_types": [
+        {
+          "name": "Check In",
+          "code": 1
+        },
+        {
+          "name": "Check Out",
+          "code": 2
+        }
+      ]
+    },
+    "areas": [
+      {
+        "id": "<AREA_IDENTIFIER>",
+        "name": "Left",
+        "type": "<IMAGE or CHECK>",
+        "picture": "<PICTURE_URL_OF_INSPECTION_COVER>",
+        "required": true,
+        "sort": 1
+      },
+      {
+        "id": "<AREA_IDENTIFIER>",
+        "name": "Right",
+        "type": "<IMAGE or CHECK>",
+        "picture": "<PICTURE_URL_OF_INSPECTION_COVER>",
+        "required": false,
+        "sort": 2
+      }
+    ],
+    "custom_checks": [
+      {
+        "name": "",
+        "code": ""
+      }
+    ]
+  }
+}

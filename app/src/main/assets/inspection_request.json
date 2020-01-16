@@ -1,0 +1,36 @@
+{
+  "inspection_meta": {
+    "inspection": "TRUCK_INSPECTION",
+    "type": 1
+  },
+  "unit_id": "",
+  "date": "",
+  "info": {
+    "customer_name": "",
+    "mileage_out": "",
+    "refer_fuel": "",
+    "pm_due": "",
+    "lease_expiration_date": ""
+  },
+  "areas": [
+    {
+      "id": "<AREA_IDENTIFIER>",
+      "name": "Left",
+      "inspection_status": "UNKNOWN or NO_ISSUE or ISSUE",
+      "issues": [
+        {
+          "number": 1,
+          "name": "",
+          "area": "",
+          "picture": "",
+          "x": 0.22,
+          "y": 0.12
+        }
+      ]
+    }
+  ],
+  "driver_info": {
+    "name": "",
+    "signature": ""
+  }
+}

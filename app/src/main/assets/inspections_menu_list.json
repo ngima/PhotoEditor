@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "message": "",
+  "status_code": 200,
+  "data": [
+    {
+      "name": "Truck Inspection",
+      "code": "TRUCK_INSPECTION",
+      "icon": "<ICON_IMAGE>"
+    },
+    {
+      "name": "Trailer Inspection",
+      "code": "TRAILER_INSPECTION",
+      "icon": "<ICON_IMAGE>"
+    }
+  ]
+}

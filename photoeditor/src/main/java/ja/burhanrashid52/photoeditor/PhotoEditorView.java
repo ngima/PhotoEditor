@@ -152,8 +152,6 @@ public class PhotoEditorView extends RelativeLayout {
         } else {
             onSaveBitmap.onBitmapReady(mImgSource.getBitmap());
         }
-
-
     }
 
     void setFilterEffect(PhotoFilter filterType) {
