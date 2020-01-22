@@ -57,6 +57,7 @@ public class PhotoEditor implements BrushViewChangeListener {
     private boolean isTextPinchZoomable;
     private Typeface mDefaultTextTypeface;
     private Typeface mDefaultEmojiTypeface;
+    private IssueClickedListener mIssueClickedListener;
 
 
     private PhotoEditor(Builder builder) {
@@ -72,6 +73,10 @@ public class PhotoEditor implements BrushViewChangeListener {
         brushDrawingView.setBrushViewChangeListener(this);
         addedViews = new ArrayList<>();
         redoViews = new ArrayList<>();
+    }
+
+    public void setIssueClickedListener(IssueClickedListener listener) {
+        this.mIssueClickedListener = listener;
     }
 
     /**
@@ -195,7 +200,7 @@ public class PhotoEditor implements BrushViewChangeListener {
      */
     @SuppressLint("ClickableViewAccessibility")
 
-    public void addIssue(int text/*, @Nullable TextStyleBuilder styleBuilder*/) {
+    public void addIssue(final int text/*, @Nullable TextStyleBuilder styleBuilder*/) {
         brushDrawingView.setBrushDrawingMode(false);
         final View textRootView = getLayout(ViewType.ISSUE);
         final TextView textInputTv = textRootView.findViewById(R.id.tvPhotoEditorText);
@@ -215,7 +220,6 @@ public class PhotoEditor implements BrushViewChangeListener {
                 frmBorder.setBackgroundResource(isBackgroundVisible ? 0 : R.drawable.rounded_red);
                 imgClose.setVisibility(isBackgroundVisible ? View.GONE : View.VISIBLE);
                 frmBorder.setTag(!isBackgroundVisible);*/
-
                 frmBorder.setBackgroundResource(R.drawable.rounded_red);
 //                imgClose.setVisibility(View.VISIBLE);
             }
@@ -234,7 +238,7 @@ public class PhotoEditor implements BrushViewChangeListener {
         addViewToParent(textRootView, ViewType.ISSUE);
     }
 
-    public void addIssue(int text, int x, int y) {
+    public void addIssue(final int text, int x, int y) {
         brushDrawingView.setBrushDrawingMode(false);
         final View textRootView = getLayout(ViewType.ISSUE);
         final TextView textInputTv = textRootView.findViewById(R.id.tvPhotoEditorText);
@@ -255,6 +259,7 @@ public class PhotoEditor implements BrushViewChangeListener {
                 imgClose.setVisibility(isBackgroundVisible ? View.GONE : View.VISIBLE);
                 frmBorder.setTag(!isBackgroundVisible);*/
 
+                if (mIssueClickedListener != null) mIssueClickedListener.onClickIssue(text - 1);
                 frmBorder.setBackgroundResource(R.drawable.rounded_red);
 //                imgClose.setVisibility(View.VISIBLE);
             }
@@ -384,7 +389,7 @@ public class PhotoEditor implements BrushViewChangeListener {
         addedViews.add(rootView);
 
         if (viewType == ViewType.ISSUE) {
-            Animation animation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.anim_bgiouncing);
+            Animation animation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.anim_bouncing);
             animation.setStartOffset(0);
             rootView.startAnimation(animation);
         }

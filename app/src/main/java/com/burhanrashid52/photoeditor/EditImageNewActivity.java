@@ -2,6 +2,7 @@ package com.burhanrashid52.photoeditor;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,13 +28,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ja.burhanrashid52.photoeditor.IssueClickedListener;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
 import ja.burhanrashid52.photoeditor.SaveSettings;
 
 import static ja.burhanrashid52.photoeditor.Utils.dpToPx;
 
-public class EditImageNewActivity extends BaseActivity {
+public class EditImageNewActivity extends BaseActivity implements IssueClickedListener {
 
     private static final int CAMERA_REQUEST = 52;
     private static final int PICK_REQUEST = 53;
@@ -42,7 +44,8 @@ public class EditImageNewActivity extends BaseActivity {
 
     private ArrayList<String> arrayList = new ArrayList<>();
     private IssueAdapter adapter = new IssueAdapter();
-
+    private RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,8 @@ public class EditImageNewActivity extends BaseActivity {
                 //.setDefaultTextTypeface(mTextRobotoTf)
                 //.setDefaultEmojiTypeface(mEmojiTypeFace)
                 .build(); // build photo editor sdk
-        final RecyclerView recyclerView = ((RecyclerView) findViewById(R.id.recyclerView));
+        mPhotoEditor.setIssueClickedListener(this);
+        recyclerView = ((RecyclerView) findViewById(R.id.recyclerView));
 
         mPhotoEditorView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -77,14 +81,18 @@ public class EditImageNewActivity extends BaseActivity {
                         mPhotoEditor.addIssue(arrayList.size() + 1, ((int) motionEvent.getX()), ((int) motionEvent.getY()));
                         arrayList.add("issue");
                         adapter.addItem(new IssueModel("" + (arrayList.size())));
-                        recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+
+                        recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
                     }
                 }
                 return true;
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        Context context;
+        layoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
 
@@ -96,7 +104,7 @@ public class EditImageNewActivity extends BaseActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         mPhotoEditorView.setLayoutParams(new LinearLayout.LayoutParams(width,
-                width * 3 / 4));
+                width * 1 / 2));
     }
 
     @SuppressLint("MissingPermission")
@@ -190,6 +198,11 @@ public class EditImageNewActivity extends BaseActivity {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onClickIssue(int position) {
+        recyclerView.smoothScrollToPosition(position);
     }
 //    }
 //
